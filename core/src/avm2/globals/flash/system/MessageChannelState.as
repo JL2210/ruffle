@@ -5,7 +5,6 @@
 
 package flash.system
 {
-
     [API("682")]
     public final class MessageChannelState
     {

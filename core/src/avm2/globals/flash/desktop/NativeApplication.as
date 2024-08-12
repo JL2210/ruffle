@@ -17,19 +17,20 @@ package flash.desktop
   {
     private static var _instance:NativeApplication;
 
-    private var _openedWindows:Array = [];
+    public var _openedWindows:Array = [];
 
     private var _idleThreshold:int = 300;
 
     public function NativeApplication()
     {
       super();
-      // TODO
       setTimeout(function():void
       {
-        dispatchEvent(new InvokeEvent(InvokeEvent.INVOKE, false, false, null, []));
+        dispatchEvent(new InvokeEvent(InvokeEvent.INVOKE, false, false, null, getArgumentsInternal()));
       }, 500);
     }
+
+    private static native function getArgumentsInternal():Array;
 
     public static function get nativeApplication():NativeApplication
     {
@@ -77,25 +78,25 @@ package flash.desktop
 
     public function get runtimeVersion():String
     {
-      stub_getter("flash.desktop.NativeApplication", "runtimeVersion");
+      stub_method("flash.desktop.NativeApplication", "runtimeVersion");
       return "5.0.0";
     }
 
     public function get runtimePatchLevel():uint
     {
-      stub_getter("flash.desktop.NativeApplication", "runtimePatchLevel");
+      stub_method("flash.desktop.NativeApplication", "runtimePatchLevel");
       return 0;
     }
 
     public function get applicationID():String
     {
-      stub_getter("flash.desktop.NativeApplication", "applicationID");
+      stub_method("flash.desktop.NativeApplication", "applicationID");
       return "";
     }
 
     public function get publisherID():String
     {
-      stub_getter("flash.desktop.NativeApplication", "publisherID");
+      stub_method("flash.desktop.NativeApplication", "publisherID");
       return "";
     }
 
@@ -171,13 +172,11 @@ package flash.desktop
 
     public function get idleThreshold():int
     {
-      stub_getter("flash.desktop.NativeApplication", "idleThreshold");
       return this._idleThreshold;
     }
 
     public function set idleThreshold(value:int):void
     {
-      stub_setter("flash.desktop.NativeApplication", "idleThreshold");
       this._idleThreshold = value;
     }
 

@@ -335,10 +335,9 @@ package flash.display {
         public function setAspectRatio(newAspectRatio:String):void {
             stub_method("flash.display.Stage", "setAspectRatio");
         }
-
+        
         [API("661")]
         public function get nativeWindow():NativeWindow {
-            stub_getter("flash.display.Stage", "nativeWindow");
             if (!this._nativeWindow) {
                 this._nativeWindow = new NativeWindow(new NativeWindowInitOptions(), this);
             }

@@ -5,9 +5,7 @@ package flash.display
     import __ruffle__.stub_method;
     import __ruffle__.stub_getter;
     
-    // According to the documentation, it should be [API("661")]
-    // but airglobal.swc disagrees with that:
-    [API("667")]
+    [API("661")]
     public class NativeMenu extends EventDispatcher
     {
 
@@ -16,6 +14,9 @@ package flash.display
 
         // The array of NativeMenuItem objects in this menu.
         public var items:Array;
+
+        // The number of NativeMenuItem objects in this menu.
+        private var _numItems:int;
 
         // The parent menu.
         private var _parent:NativeMenu;
@@ -123,8 +124,7 @@ package flash.display
             stub_method("flash.display.NativeMenu", "setItemIndex");
         }
 
-        // According to the documentation, it should be [API("668")]
-        // but there is no version gate in airglobal.swc
+        [API("668")]
         public function get isSupported():Boolean
         {
             return this._isSupported;

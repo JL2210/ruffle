@@ -44,6 +44,10 @@ package flash.display
           dispatchEvent(new NativeWindowBoundsEvent(NativeWindowBoundsEvent.RESIZE, false, false, _bounds, _bounds = new Rectangle(x, y, width, height)));
         });
       }
+      else
+      {
+        stub_constructor("flash.display.NativeWindow without stage");
+      }
 
       _maximizable = initOptions.maximizable;
       _minimizable = initOptions.minimizable;
@@ -108,7 +112,8 @@ package flash.display
     public function set bounds(value:Rectangle):void
     {
       stub_setter("flash.display.NativeWindow", "bounds");
-      _bounds = value;
+      _bounds.height = height = value.height;
+      _bounds.width = width = value.width;
     }
 
     public function get maximizable():Boolean
@@ -163,7 +168,7 @@ package flash.display
     public function close():void
     {
       stub_method("flash.display.NativeWindow", "close");
-      if (dispatchEvent(new Event(Event.CLOSING, false, true)))
+      if (!dispatchEvent(new Event(Event.CLOSING, false, true)))
       {
         _closed = true;
         dispatchEvent(new Event(Event.CLOSE));
@@ -255,7 +260,6 @@ package flash.display
 
     public function get active():Boolean
     {
-      stub_getter("flash.display.NativeWindow", "active");
       return true;
     }
 
@@ -303,6 +307,7 @@ package flash.display
       return false;
     }
 
+    [API("661")]
     public function get supportsTransparency():Boolean
     {
       stub_getter("flash.display.NativeWindow", "supportsTransparency");

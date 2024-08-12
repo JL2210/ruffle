@@ -13,6 +13,9 @@ package flash.desktop
     // The icon image as an array of BitmapData objects of different sizes.
     public var bitmaps:Array;
 
-    function Icon() {}
+    function Icon(bitmaps:Array)
+    {
+      this.bitmaps = bitmaps;
+    }
   }
 }

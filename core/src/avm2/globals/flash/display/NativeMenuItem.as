@@ -1,10 +1,7 @@
 package flash.display {
     import flash.events.EventDispatcher;
-    import __ruffle__.stub_constructor;
-    import __ruffle__.stub_getter;
-    // According to the documentation, it should be [API("661")]
-    // but airglobal.swc disagrees with that:
-    [API("667")]
+
+    [API("661")]
     public class NativeMenuItem extends EventDispatcher {
         public var enabled: Boolean = false;
         public var checked: Boolean = false;

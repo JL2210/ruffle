@@ -290,6 +290,8 @@ pub struct Player {
     #[allow(unused)]
     player_runtime: PlayerRuntime,
 
+    air_arguments: Vec<String>,
+
     swf: Arc<SwfMovie>,
 
     is_playing: bool,
@@ -2192,6 +2194,7 @@ impl Player {
 
             let mut update_context = UpdateContext {
                 player_version: this.player_version,
+                air_arguments: &this.air_arguments,
                 swf: &mut this.swf,
                 library,
                 rng: &mut this.rng,
@@ -2464,6 +2467,7 @@ pub struct PlayerBuilder {
     gamepad_button_mapping: HashMap<GamepadButton, KeyCode>,
     player_version: Option<u8>,
     player_runtime: PlayerRuntime,
+    air_arguments: Vec<String>,
     quality: StageQuality,
     page_url: Option<String>,
     frame_rate: Option<f64>,
@@ -2515,6 +2519,7 @@ impl PlayerBuilder {
             gamepad_button_mapping: HashMap::new(),
             player_version: None,
             player_runtime: PlayerRuntime::default(),
+            air_arguments: vec![],
             quality: StageQuality::High,
             page_url: None,
             frame_rate: None,
@@ -2686,6 +2691,18 @@ impl PlayerBuilder {
     /// Configures the player runtime (default is `PlayerRuntime::FlashPlayer`)
     pub fn with_player_runtime(mut self, runtime: PlayerRuntime) -> Self {
         self.player_runtime = runtime;
+        self
+    }
+
+    /// Configures the AIR arguments variable.
+    pub fn with_air_arguments(mut self, air_arguments: Vec<String>) -> Self {
+        self.air_arguments = air_arguments;
+        self
+    }
+
+    /// Configures the security sandbox type (default is `SandboxType::LocalTrusted`)
+    pub fn with_sandbox_type(mut self, sandbox_type: SandboxType) -> Self {
+        self.sandbox_type = sandbox_type;
         self
     }
 
@@ -2863,6 +2880,7 @@ impl PlayerBuilder {
                 instance_counter: 0,
                 player_version,
                 player_runtime: self.player_runtime,
+                air_arguments: self.air_arguments,
                 is_playing: self.autoplay,
                 needs_render: true,
                 self_reference: self_ref.clone(),

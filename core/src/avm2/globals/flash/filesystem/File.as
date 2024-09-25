@@ -8,7 +8,7 @@ package flash.filesystem
   import __ruffle__.stub_getter;
 
   [Ruffle(InstanceAllocator)]
-  [API("661")]
+  //[API("661")]
   public class File extends FileReference
   {
     private static var _applicationStorageDirectory:File;

@@ -12,7 +12,7 @@ package flash.desktop
   import __ruffle__.stub_getter;
   import __ruffle__.stub_setter;
 
-  [API("661")]
+  //[API("661")]
   public final class NativeApplication extends EventDispatcher
   {
     private static var _instance:NativeApplication;
@@ -232,14 +232,14 @@ package flash.desktop
       stub_method("flash.desktop.NativeApplication", "removeAsDefaultApplication");
     }
 
-    [API("681")]
+    //[API("681")]
     public function get executeInBackground():Boolean
     {
       stub_getter("flash.desktop.NativeApplication", "executeInBackground");
       return false;
     }
 
-    [API("681")]
+    //[API("681")]
     public function set executeInBackground(param1:Boolean):void
     {
       stub_setter("flash.desktop.NativeApplication", "executeInBackground");

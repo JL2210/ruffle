@@ -1,4 +1,8 @@
 package flash.system {
+    import flash.utils.ByteArray;
+    import __ruffle__.stub_getter;
+    import __ruffle__.stub_method;
+
     [API("680")] // the docs say 682, that's wrong
     public final class WorkerDomain {
         public static const isSupported: Boolean = false;

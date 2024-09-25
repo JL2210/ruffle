@@ -2712,12 +2712,6 @@ impl PlayerBuilder {
         self
     }
 
-    /// Configures the security sandbox type (default is `SandboxType::LocalTrusted`)
-    pub fn with_sandbox_type(mut self, sandbox_type: SandboxType) -> Self {
-        self.sandbox_type = sandbox_type;
-        self
-    }
-
     // Configure the embedding page's URL (if applicable)
     pub fn with_page_url(mut self, page_url: Option<String>) -> Self {
         self.page_url = page_url;

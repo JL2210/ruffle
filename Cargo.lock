@@ -4437,7 +4437,6 @@ dependencies = [
  "tracing",
  "url",
  "urlencoding",
- "webbrowser",
  "webpki-roots",
  "zip",
 ]

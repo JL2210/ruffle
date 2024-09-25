@@ -1,6 +1,6 @@
 use crate::backends::{
-    CpalAudioBackend, DesktopExternalInterfaceProvider, DesktopFSCommandProvider,
-    DesktopNavigatorInterface, DesktopUiBackend, OsFileSystemBackend, RfdNavigatorInterface,
+    DesktopExternalInterfaceProvider, DesktopFSCommandProvider,
+    DesktopNavigatorInterface, DesktopUiBackend, OsFileSystemBackend,
 };
 use crate::custom_event::RuffleEvent;
 use crate::gui::{FilePicker, MovieView};

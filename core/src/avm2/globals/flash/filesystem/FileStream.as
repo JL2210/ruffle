@@ -14,7 +14,7 @@ package flash.filesystem
   import flash.utils.IDataOutput;
 
   [Ruffle(InstanceAllocator)]
-  //[API("661")]
+  [API("661")]
   public class FileStream extends EventDispatcher implements IDataInput, IDataOutput
   {
     // public var readAhead:Number;
@@ -66,8 +66,8 @@ package flash.filesystem
     public native function writeUTF(value:String):void;
     public native function writeUTFBytes(value:String):void;
 
-    public native function get endian():String;
-    public native function set endian(value:String):void;
+		public native function get endian():String;
+		public native function set endian(value:String):void;
     
     public native function get bytesAvailable():uint;
     public native function get position():Number;

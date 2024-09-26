@@ -1,6 +1,6 @@
 use crate::backends::{
-    DesktopExternalInterfaceProvider, DesktopFSCommandProvider,
-    DesktopNavigatorInterface, DesktopUiBackend, OsFileSystemBackend,
+    DesktopExternalInterfaceProvider, DesktopFSCommandProvider, DesktopNavigatorInterface,
+    DesktopUiBackend, OsFileSystemBackend,
 };
 use crate::custom_event::RuffleEvent;
 use crate::gui::{FilePicker, MovieView};
@@ -258,9 +258,9 @@ impl ActivePlayer {
                 .to_owned()
                 .unwrap_or_else(|| movie_url.clone())
                 .to_file_path()
-                .unwrap()
+                .expect("movie url not on localhost?")
                 .parent()
-                .unwrap()
+                .expect("file doesn't have parent directory?")
                 .into(),
         );
 

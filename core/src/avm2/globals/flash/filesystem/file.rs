@@ -202,7 +202,7 @@ pub fn create_directory<'gc>(
 ) -> Result<Value<'gc>, Error<'gc>> {
     if let Some(file_object) = this.as_file_object() {
         if let Some(path) = file_object.native_path() {
-            if let Err(_) = activation.context.filesystem.create_directory(&path) {
+            if activation.context.filesystem.create_directory(&path).is_err() {
                 return Err(Error::AvmError(io_error(activation, "TODO", 1000)?));
             }
         }
@@ -218,10 +218,11 @@ pub fn delete_directory<'gc>(
 ) -> Result<Value<'gc>, Error<'gc>> {
     if let Some(file_object) = this.as_file_object() {
         if let Some(path) = file_object.native_path() {
-            if let Err(_) = activation
+            if activation
                 .context
                 .filesystem
                 .delete_directory(&path, args.get_bool(0))
+                .is_err()
             {
                 return Err(Error::AvmError(io_error(activation, "TODO", 1000)?));
             }
@@ -238,7 +239,7 @@ pub fn delete_file<'gc>(
 ) -> Result<Value<'gc>, Error<'gc>> {
     if let Some(file_object) = this.as_file_object() {
         if let Some(path) = file_object.native_path() {
-            if let Err(_) = activation.context.filesystem.delete_file(&path) {
+            if activation.context.filesystem.delete_file(&path).is_err() {
                 return Err(Error::AvmError(io_error(activation, "TODO", 1000)?));
             }
         }
@@ -299,7 +300,7 @@ pub fn resolve_path<'gc>(
             new_file_object.set_native_path(
                 file_object
                     .native_path()
-                    .and_then(|p| Some(p.join(&path).clean())),
+                    .map(|p| p.join(&path).clean()),
             );
 
             if let Some(mut formatted_url) = file_object.formatted_url() {

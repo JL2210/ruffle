@@ -65,7 +65,7 @@ pub fn set_position<'gc>(
 
     if let Some(file_stream_object) = this.as_file_stream_object() {
         if let Some(ref mut handle) = *file_stream_object.handle().borrow_mut() {
-            if let Err(_) = handle.seek(SeekFrom::Start(pos)) {
+            if handle.seek(SeekFrom::Start(pos)).is_err() {
                 return Err(Error::AvmError(io_error(activation, "TODO", 1000)?));
             }
         }
@@ -231,7 +231,7 @@ macro_rules! impl_write {
                 Endian::Big => val.to_be_bytes(),
                 Endian::Little => val.to_le_bytes(),
             };
-            match handle.write(&val_bytes) {
+            match handle.write_all(&val_bytes) {
                 Ok(_) => Ok(()),
                 Err(_) => Err(Error::AvmError(io_error(activation, "TODO", 1000)?)),
             }
@@ -405,7 +405,7 @@ pub fn write_utf_bytes_inner<'gc>(
     handle: &mut Box<dyn File>,
     value: AvmString<'gc>,
 ) -> Result<Value<'gc>, Error<'gc>> {
-    if handle.write_all(&value.to_utf8_lossy().as_bytes()).is_ok() {
+    if handle.write_all(value.to_utf8_lossy().as_bytes()).is_ok() {
         return Ok(Value::Undefined);
     }
     Err(Error::AvmError(io_error(activation, "TODO", 1000)?))

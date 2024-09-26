@@ -42,13 +42,13 @@ pub struct OsFileSystemBackend(KnownDirectories);
 
 impl OsFileSystemBackend {
     pub fn new(base_url: PathBuf) -> Self {
-        let base_dirs = BaseDirs::new().unwrap();
-        let user_dirs = UserDirs::new().unwrap();
+        let base_dirs = BaseDirs::new().expect("no home directory?");
+        let user_dirs = UserDirs::new().expect("no home directory?");
         Self(KnownDirectories {
             app: base_url,
             app_storage: base_dirs.data_dir().join("APP_NAME_TODO/Local Store"),
-            documents: user_dirs.document_dir().unwrap().into(),
-            desktop: user_dirs.desktop_dir().unwrap().into(),
+            documents: user_dirs.document_dir().expect("no documents directory?").into(),
+            desktop: user_dirs.desktop_dir().expect("no desktop directory?").into(),
             user: user_dirs.home_dir().into(),
             temp: std::env::temp_dir(),
             // TODO

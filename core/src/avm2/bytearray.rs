@@ -84,9 +84,9 @@ pub enum ObjectEncoding {
     Amf3 = 3,
 }
 
-impl Into<AMFVersion> for ObjectEncoding {
-    fn into(self) -> AMFVersion {
-        match self {
+impl From<ObjectEncoding> for AMFVersion {
+    fn from(val: ObjectEncoding) -> Self {
+        match val {
             ObjectEncoding::Amf0 => AMFVersion::AMF0,
             ObjectEncoding::Amf3 => AMFVersion::AMF3,
         }

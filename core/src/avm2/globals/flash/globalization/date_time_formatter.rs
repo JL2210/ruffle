@@ -4,7 +4,7 @@ use crate::string::AvmString;
 use chrono::format::Locale;
 
 fn pattern_to_chrono(letter: char, count: usize) -> &'static str {
-    (match (letter, count) {
+    match (letter, count) {
         ('E', 4) => "%A",         // Full weekday name
         ('E', _) => "%a",         // Abbreviated weekday name
         ('y', 2) => "%y",         // Last 2 digits of the year
@@ -29,12 +29,11 @@ fn pattern_to_chrono(letter: char, count: usize) -> &'static str {
         ('w', _) => "%U",         // Week number of the year (0-52/53) with padding
         ('D', 1) => "%-j",        // Day of the year without padding
         ('D', _) => "%j",         // Day of the year with padding
-        ('Z', 1 | 2 | 3) => "%z", // Timezone offset (±hhmm)
+        ('Z', 1..=3) => "%z", // Timezone offset (±hhmm)
         ('Z', _) => "%:z",        // Timezone offset (±hh:mm)
         ('v', _) => "%Z",         // Timezone abbreviation
         _ => "",                  // Unknown/unsupported pattern
-    })
-    .into()
+    }
 }
 
 fn convert_to_chrono_pattern(flash_pattern: &str) -> String {

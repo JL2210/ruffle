@@ -85,6 +85,8 @@ impl Write for NullFile {
 
 pub struct NullFileSystemBackend(KnownDirectories);
 
+// probably don't want this to be used by default
+#[allow(new_without_default)]
 impl NullFileSystemBackend {
     pub fn new() -> Self {
         Self(KnownDirectories {

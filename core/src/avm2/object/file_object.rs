@@ -122,9 +122,9 @@ impl<'gc> FileObject<'gc> {
                 })
                 .and_then(|base| base.join(&url[Position::BeforeUsername..][1..]).or(Err(())))
                 .and_then(|url| url.to_file_path())
-                .and_then(|p| Ok(p.clean()))
+                .map(|p| p.clean())
                 .ok(),
-                "file" => url.to_file_path().and_then(|p| Ok(p.clean())).ok(),
+                "file" => url.to_file_path().map(|p| p.clean()).ok(),
                 _ => None,
             });
         }

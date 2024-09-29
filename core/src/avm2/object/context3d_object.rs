@@ -233,8 +233,7 @@ impl<'gc> Context3DObject<'gc> {
         mut num_triangles: i32,
     ) {
         if num_triangles == -1 {
-            // FIXME - should we error if the number of indices isn't a multiple of 3?
-            num_triangles = (index_buffer.count() / 3) as i32;
+            num_triangles = (index_buffer.count().checked_div(3).expect("number of indices must be a multiple of 3")) as i32;
         }
         let handle = index_buffer.handle();
 

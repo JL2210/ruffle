@@ -106,7 +106,10 @@ pub fn set_endian<'gc>(
         file_stream_object.set_endian(match endian.to_string().as_str() {
             "bigEndian" => Endian::Big,
             "littleEndian" => Endian::Little,
-            _ => return Ok(Value::Undefined),
+            _ => {
+		tracing::warn!("no endianness defined");
+                return Ok(Value::Undefined);
+            },
         });
     }
 
@@ -138,7 +141,10 @@ pub fn set_object_encoding<'gc>(
         file_stream_object.set_object_encoding(match encoding {
             0 => ObjectEncoding::Amf0,
             3 => ObjectEncoding::Amf3,
-            _ => return Ok(Value::Undefined),
+            _ => {
+                tracing::warn!("unknown object encoding");
+                return Ok(Value::Undefined);
+            }
         });
     }
 
